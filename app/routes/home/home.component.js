@@ -9,8 +9,6 @@ export class Home extends PureComponent {
         <Helmet
           title="Homepage"
         />
-
-        Home
       </div>
     );
   }
