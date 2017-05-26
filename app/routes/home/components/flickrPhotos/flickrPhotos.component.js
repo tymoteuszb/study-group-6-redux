@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
-import {Card, CardHeader } from 'material-ui/Card';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { Card, CardHeader } from 'material-ui/Card';
+import { GridList, GridTile } from 'material-ui/GridList';
 
 
 export class FlickrPhotos extends PureComponent {

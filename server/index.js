@@ -2,7 +2,7 @@
 
 const express = require('express');
 const logger = require('./logger');
-const api = require('./api');
+require('./api');
 
 /* eslint-disable import/no-extraneous-dependencies */
 const argv = require('minimist')(process.argv.slice(2));

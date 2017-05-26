@@ -9,12 +9,12 @@ export const { Types: FlickrTypes, Creators: FlickrActions } = createActions({
 }, { prefix: 'FLICKR_' });
 
 const CampaignRecord = new Record({
-  photos: List()
+  photos: List(),
 });
 
 export const INITIAL_STATE = new CampaignRecord({});
 
-const getPhotosSuccessHandler = (state = INITIAL_STATE, { data : { photos } }) => state.merge({ photos });
+const getPhotosSuccessHandler = (state = INITIAL_STATE, { data: { photos } }) => state.merge({ photos });
 
 export const reducer = createReducer(INITIAL_STATE, {
   [FlickrTypes.GET_PHOTOS_SUCCESS]: getPhotosSuccessHandler,

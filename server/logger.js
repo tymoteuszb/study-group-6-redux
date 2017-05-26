@@ -34,7 +34,7 @@ ${chalk.blue(`Press ${chalk.italic('CTRL-C')} to stop`)}
   },
 
   // Called when express.js app starts on given port w/o errors
-  apiStarted: (port, host, tunnelStarted) => {
+  apiStarted: (port, host) => {
     console.log(`Api started ! ${chalk.green('✓')}`);
 
     console.log(`

@@ -1,8 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
 const request = require('request');
 const querystring = require('querystring');
 const logger = require('./logger');
 const argv = require('minimist')(process.argv.slice(2));
+/* eslint-enable import/no-extraneous-dependencies */
 
 
 const api = express();
@@ -16,9 +18,9 @@ const prettyHost = customHost || 'localhost';
 
 const port = argv.apiPort || process.env.API_PORT || 3001;
 
-api.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+api.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -29,7 +31,7 @@ api.get('/flickr', function (req, res) {
       res.json(JSON.parse(body));
     }
     res.status(response.statusCode).end();
-  })
+  });
 });
 
 api.listen(port, host, (err) => {
@@ -37,7 +39,7 @@ api.listen(port, host, (err) => {
     return logger.error(err.message);
   }
 
-  logger.apiStarted(port, prettyHost);
+  return logger.apiStarted(port, prettyHost);
 });
 
 
