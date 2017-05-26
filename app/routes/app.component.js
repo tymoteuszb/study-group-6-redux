@@ -34,11 +34,8 @@ export class App extends PureComponent {
     return (
       <div className="app">
         <Helmet
-          titleTemplate="%s - Apptension React Boilerplate"
-          defaultTitle="Apptension React Boilerplate"
-          meta={[
-            { name: 'description', content: 'Apptension React Boilerplate application' },
-          ]}
+          titleTemplate="%s - React-Redux Exercise"
+          defaultTitle="React-Redux Exercise"
         />
 
         <IntlProvider

@@ -2,7 +2,6 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 import { spy } from 'sinon';
-import Helmet from 'react-helmet';
 import { IntlProvider } from 'react-intl';
 
 import { translationMessages } from '../../i18n';
@@ -39,20 +38,6 @@ describe('App: Component', () => {
   it('should render App when language is set', () => {
     const wrapper = shallow(component({ language: 'en' }));
     expect(wrapper.find('.app')).to.have.length(1);
-  });
-
-  it('should render <Helmet/>', () => {
-    const wrapper = shallow(component({}));
-    expect(wrapper.find(Helmet)).to.have.length(1);
-  });
-
-  it('should pass props to <Helmet/>', () => {
-    const wrapper = shallow(component({}));
-    const helmetProps = wrapper.find(Helmet).props();
-
-    expect(helmetProps.titleTemplate).to.be.a('string');
-    expect(helmetProps.defaultTitle).to.be.a('string');
-    expect(helmetProps.meta).to.be.an('array');
   });
 
   it('should render <IntlProvider/>', () => {
@@ -94,18 +79,5 @@ describe('App: Component', () => {
 
     mount(component({ router, setLanguage }));
     expect(setLanguage.firstCall.args[0]).to.equal(DEFAULT_LOCALE);
-  });
-
-  it('should set proper language from param', () => {
-    const setLanguage = spy();
-    const router = {
-      params: {
-        lang: 'de',
-      },
-      push: spy(),
-    };
-
-    mount(component({ router, setLanguage }));
-    expect(setLanguage.firstCall.args[0]).to.equal('de');
   });
 });
