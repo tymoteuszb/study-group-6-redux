@@ -1,2 +1,23 @@
+@import "components/components";
+
 .home {
+  display: flex;
+  justify-content: center;
+
+}
+
+.home__content {
+  max-width: 1260px;
+  padding: 40px;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.home__column {
+  display: flex;
+}
+
+.home__column--half {
+  max-width: 48%;
+  min-width: 48%;
 }
