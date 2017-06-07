@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { prop } from 'ramda';
 
 const selectMapState = state => state.get('map');
 

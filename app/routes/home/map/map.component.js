@@ -9,11 +9,13 @@ import ActionGrade from 'material-ui/svg-icons/action/grade';
 import { when, isNil, complement, equals, cond, pipe, or, prop } from 'ramda';
 
 import { PIN_MODE, COORDINATES_MODE, LOCATION_MODE } from '../../../modules/map/map.constants';
+import { mapStyles } from './map.styles';
 
 const getCoordinatesText = (lat, long) => `${lat}, ${long}`;
 const isLocationMode = equals(LOCATION_MODE);
 const isCoordinatesMode = equals(COORDINATES_MODE);
 const isPinMode = equals(PIN_MODE);
+const MARKER_COLOR = '#ff8f00';
 
 const PositionMarker = ({lat, lng}) => <div>
   <IconButton
@@ -21,7 +23,7 @@ const PositionMarker = ({lat, lng}) => <div>
     touch={true}
     tooltipPosition="top-center"
   >
-    <ActionGrade />
+    <ActionGrade color={MARKER_COLOR}  />
   </IconButton>
 </div>;
 
@@ -37,10 +39,12 @@ export class Map extends PureComponent {
     hasLocationPermissions: false,
   };
 
-  componentDidMount() {
-    this.getLocationPermissions();
-    this.getCurrentLocation()
-  }
+  componentDidMount = () => this.getLocationPermissions();
+
+  componentWillUpdate = (nextProps) => pipe(
+    prop('mode'),
+    when(isLocationMode, () => this.getCurrentLocation()),
+  )(this.props);
 
   getLocationPermissions = () => when(
     complement(isNil),
@@ -48,21 +52,21 @@ export class Map extends PureComponent {
   )(navigator.geolocation);
 
   getCurrentLocation = () => navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) =>
-    this.props.changePosition(latitude, longitude));
+      this.props.changePosition(latitude, longitude));
 
   changeMode = (mode) => this.props.changeMode(mode);
 
   handleLatitudeChange = (e) => this.props.changePosition(parseFloat(e.target.value), this.props.position.get('long'));
+
   handleLongitudeChange = (e) => this.props.changePosition(this.props.position.get('lat'), parseFloat(e.target.value));
 
-  componentWillUpdate = pipe(
+  handleMapClick = ({lat, lng}) => pipe(
     prop('mode'),
-    when(isLocationMode, () => this.getCurrentLocation()),
-  );
-
-  handleMarkerDrag = (e) => {
-    console.log(e);
-  }
+    when(
+      isPinMode,
+      () => this.props.changePosition(lat, lng)
+    )
+  )(this.props);
 
   get coordinatesPanel() {
     return <CardText>
@@ -91,7 +95,7 @@ export class Map extends PureComponent {
     return <CardActions>
       <div className="options__button-wrapper">
         <RaisedButton
-          primary
+          secondary
           label="Refresh"
           onClick={this.getCurrentLocation}
         />
@@ -112,6 +116,7 @@ export class Map extends PureComponent {
   get mapOptions() {
     return {
       scrollwheel: false,
+      styles: mapStyles,
     }
   }
 
@@ -135,15 +140,19 @@ export class Map extends PureComponent {
                   disabled={isCoordinatesMode(mode)}
                 />
                 <FlatButton
-                  label="Mark the pin"
+                  label="Move the marker"
                   onClick={() => this.changeMode(PIN_MODE)}
                   disabled={isPinMode(mode)}
                 />
+                <div className="options__button-wrapper">
+                  <RaisedButton label="Show results" primary fullWidth={true} />
+                </div>
               </CardActions>
             </Card>
           </div>
         </div>
         <GoogleMapReact
+          onClick={this.handleMapClick}
           defaultZoom={this.props.zoom}
           center={{
             lat: this.props.position.get('lat'),
@@ -154,8 +163,6 @@ export class Map extends PureComponent {
           <PositionMarker
             lat={this.props.position.get('lat')}
             lng={this.props.position.get('long')}
-            draggable={true}
-            onDragStart={this.handleMarkerDrag}
           />
         </GoogleMapReact>
       </div>
