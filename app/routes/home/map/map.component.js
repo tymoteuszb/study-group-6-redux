@@ -11,15 +11,13 @@ import { when, isNil, complement, equals, cond, pipe, or, prop } from 'ramda';
 import { PIN_MODE, COORDINATES_MODE, LOCATION_MODE } from '../../../modules/map/map.constants';
 import { mapStyles } from './map.styles';
 
-const getCoordinatesText = (lat, long) => `${lat}, ${long}`;
 const isLocationMode = equals(LOCATION_MODE);
 const isCoordinatesMode = equals(COORDINATES_MODE);
 const isPinMode = equals(PIN_MODE);
 const MARKER_COLOR = '#ff8f00';
 
-const PositionMarker = ({ lat, lng }) => <div>
+const PositionMarker = () => <div>
   <IconButton
-    tooltip={getCoordinatesText(lat, lng)}
     touch={true}
     tooltipPosition="top-center"
   >
@@ -131,23 +129,25 @@ export class Map extends PureComponent {
             <Card>
               {this.options}
               <CardActions>
-                <FlatButton
-                  label="Current location"
-                  onClick={() => this.props.changeMode(LOCATION_MODE)}
-                  disabled={or(isLocationMode(mode), equals(this.props.hasLocationPermissions, false))}
-                />
-                <FlatButton
-                  label="Coordinates"
-                  onClick={() => this.props.changeMode(COORDINATES_MODE)}
-                  disabled={isCoordinatesMode(mode)}
-                />
-                <FlatButton
-                  label="Move the marker"
-                  onClick={() => this.props.changeMode(PIN_MODE)}
-                  disabled={isPinMode(mode)}
-                />
-                <div className="options__button-wrapper">
-                  <RaisedButton label="Show results" primary fullWidth={true} />
+                <div className="options__buttons">
+                  <FlatButton
+                    label="Current location"
+                    onClick={() => this.props.changeMode(LOCATION_MODE)}
+                    disabled={or(isLocationMode(mode), equals(this.props.hasLocationPermissions, false))}
+                  />
+                  <FlatButton
+                    label="Coordinates"
+                    onClick={() => this.props.changeMode(COORDINATES_MODE)}
+                    disabled={isCoordinatesMode(mode)}
+                  />
+                  <FlatButton
+                    label="Move the marker"
+                    onClick={() => this.props.changeMode(PIN_MODE)}
+                    disabled={isPinMode(mode)}
+                  />
+                  <div className="options__button-wrapper">
+                    <RaisedButton label="Show results" primary fullWidth={true} />
+                  </div>
                 </div>
               </CardActions>
             </Card>
