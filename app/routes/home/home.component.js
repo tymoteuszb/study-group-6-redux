@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 
 import FlickrPhotos from './components/flickrPhotos/flickrPhotos.container';
@@ -9,6 +9,15 @@ import { Map } from './map/map.component';
 import { PIN_MODE } from '../../modules/map/map.constants'
 
 export class Home extends PureComponent {
+  static propTypes = {
+    changeLocationPermissions: PropTypes.func.isRequired,
+    changePosition: PropTypes.func.isRequired,
+    changeMode: PropTypes.func.isRequired,
+    hasLocationPermissions: PropTypes.bool.isRequired,
+    position: PropTypes.object.isRequired,
+    mode: PropTypes.string.isRequired,
+  }
+
   render() {
     return (
       <div className="home">

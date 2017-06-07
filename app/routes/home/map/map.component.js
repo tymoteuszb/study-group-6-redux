@@ -41,7 +41,10 @@ export class Map extends PureComponent {
     hasLocationPermissions: false,
   };
 
-  componentDidMount = () => this.getLocationPermissions();
+  componentDidMount = () => {
+    this.getLocationPermissions();
+    this.getCurrentLocation();
+  };
 
   componentWillUpdate = pipe(
     prop('mode'),
