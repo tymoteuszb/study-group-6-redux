@@ -46,11 +46,6 @@ export class Map extends PureComponent {
     this.getCurrentLocation();
   };
 
-  componentWillUpdate = pipe(
-    prop('mode'),
-    when(isLocationMode, () => this.getCurrentLocation()),
-  );
-
   getLocationPermissions = () => when(
     complement(isNil),
     () => this.props.changeLocationPermissions(true)
@@ -99,7 +94,7 @@ export class Map extends PureComponent {
       <div className="options__button-wrapper">
         <RaisedButton
           secondary
-          label="Refresh"
+          label="Get location"
           onClick={this.getCurrentLocation}
         />
       </div>
