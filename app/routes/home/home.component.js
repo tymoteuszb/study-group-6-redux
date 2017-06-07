@@ -6,7 +6,7 @@ import WeatherWidget from './components/weatherWidget/weatherWidget.container';
 import Entertainment from './components/entertainment/entertainment.container';
 
 import { Map } from './map/map.component';
-import {} from '../../modules/map'
+import { PIN_MODE } from '../../modules/map/map.constants'
 
 export class Home extends PureComponent {
   render() {
@@ -18,6 +18,12 @@ export class Home extends PureComponent {
 
         <Map
           currentMode={PIN_MODE}
+          changeLocationPermissions={this.props.changeLocationPermissions}
+          changePosition={this.props.changePosition}
+          position={this.props.position}
+          changeMode={this.props.changeMode}
+          mode={this.props.mode}
+          hasLocationPermissions={this.props.hasLocationPermissions}
         />
         <div className="home__content">
           <div className="home__column home__column--half">

@@ -19,3 +19,18 @@
   align-self: flex-end;
   margin-bottom: 100px;
 }
+
+.options__input-wrapper {
+  margin: 10px;
+}
+
+.options__content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.options__button-wrapper{
+  padding: 20px;
+  text-align: center;
+}
