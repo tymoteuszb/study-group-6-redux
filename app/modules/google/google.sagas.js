@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import envConfig from 'env-config';
 
 import { GoogleActions, GoogleTypes } from './google.redux';
@@ -15,7 +15,7 @@ export function* getPlacesSaga({ latitude, longitude, placeType, name }) {
       name,
     });
 
-    yield put(GoogleActions.getPlacesSuccess(data));
+    yield put(GoogleActions.getPlacesSuccess(data, placeType));
   } catch (e) {
     yield put(GoogleActions.getPlacesFailure(e));
   }
@@ -31,5 +31,5 @@ export function* choosePlacesSaga() {
 
 export default function* googleSaga() {
   yield takeLatest('FLICKR_GET_PHOTOS', choosePlacesSaga); // get weather success action
-  yield takeLatest(GoogleTypes.GET_PLACES, getPlacesSaga);
+  yield takeEvery(GoogleTypes.GET_PLACES, getPlacesSaga);
 }

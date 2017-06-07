@@ -4,17 +4,21 @@ import { Record, List } from 'immutable';
 
 export const { Types: GoogleTypes, Creators: GoogleActions } = createActions({
   getPlaces: ['latitude', 'longitude', 'placeType', 'name'],
-  getPlacesSuccess: ['data'],
+  getPlacesSuccess: ['data', 'placeType'],
   getPlacesFailure: ['error'],
 }, { prefix: 'GOOGLE_' });
 
 const GoogleRecord = new Record({
-  places: List(),
+  places: {
+    movie_theater: List(), // eslint-disable-line camelcase
+    park: List(),
+  },
 });
 
 export const INITIAL_STATE = new GoogleRecord({});
 
-const getPlacesSuccessHandler = (state, { data: { results } }) => state.merge({ places: results });
+const getPlacesSuccessHandler = (state, { data: { results }, placeType }) =>
+  state.merge({ places: { [placeType]: results } });
 
 export const reducer = createReducer(INITIAL_STATE, {
   [GoogleTypes.GET_PLACES_SUCCESS]: getPlacesSuccessHandler,

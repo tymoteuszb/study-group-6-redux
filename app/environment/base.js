@@ -10,5 +10,6 @@ export default {
   },
   google: {
     apiKey: 'AIzaSyBtBtrshOX93nBxzDJslui9QTWnI6OI_Aw',
+    photoApiUrl: 'https://maps.googleapis.com/maps/api/place/photo',
   },
 };

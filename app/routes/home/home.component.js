@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 
 import FlickrPhotos from './components/flickrPhotos/flickrPhotos.container';
 import WeatherWidget from './components/weatherWidget/weatherWidget.container';
-import Places from './components/places/places.container';
+import Entertainment from './components/entertainment/entertainment.container';
 
 
 export class Home extends PureComponent {
@@ -22,7 +22,7 @@ export class Home extends PureComponent {
             <WeatherWidget />
           </div>
           <div className="home__column">
-            <Places />
+            <Entertainment />
           </div>
         </div>
       </div>
