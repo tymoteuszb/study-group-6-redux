@@ -17,13 +17,13 @@ const isCoordinatesMode = equals(COORDINATES_MODE);
 const isPinMode = equals(PIN_MODE);
 const MARKER_COLOR = '#ff8f00';
 
-const PositionMarker = ({lat, lng}) => <div>
+const PositionMarker = ({ lat, lng }) => <div>
   <IconButton
     tooltip={getCoordinatesText(lat, lng)}
     touch={true}
     tooltipPosition="top-center"
   >
-    <ActionGrade color={MARKER_COLOR}  />
+    <ActionGrade color={MARKER_COLOR} />
   </IconButton>
 </div>;
 
@@ -32,6 +32,10 @@ export class Map extends PureComponent {
     mode: PropTypes.string.isRequired,
     position: PropTypes.object.isRequired,
     hasLocationPermissions: PropTypes.bool.isRequired,
+    changeLocationPermissions: PropTypes.func.isRequired,
+    changePosition: PropTypes.func.isRequired,
+    changeMode: PropTypes.func.isRequired,
+    zoom: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -41,10 +45,10 @@ export class Map extends PureComponent {
 
   componentDidMount = () => this.getLocationPermissions();
 
-  componentWillUpdate = (nextProps) => pipe(
+  componentWillUpdate = pipe(
     prop('mode'),
     when(isLocationMode, () => this.getCurrentLocation()),
-  )(this.props);
+  );
 
   getLocationPermissions = () => when(
     complement(isNil),
@@ -54,13 +58,11 @@ export class Map extends PureComponent {
   getCurrentLocation = () => navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) =>
       this.props.changePosition(latitude, longitude));
 
-  changeMode = (mode) => this.props.changeMode(mode);
+  handleLatitudeChange = e => this.props.changePosition(parseFloat(e.target.value), this.props.position.get('long'));
 
-  handleLatitudeChange = (e) => this.props.changePosition(parseFloat(e.target.value), this.props.position.get('long'));
+  handleLongitudeChange = e => this.props.changePosition(this.props.position.get('lat'), parseFloat(e.target.value));
 
-  handleLongitudeChange = (e) => this.props.changePosition(this.props.position.get('lat'), parseFloat(e.target.value));
-
-  handleMapClick = ({lat, lng}) => pipe(
+  handleMapClick = ({ lat, lng }) => pipe(
     prop('mode'),
     when(
       isPinMode,
@@ -69,7 +71,7 @@ export class Map extends PureComponent {
   )(this.props);
 
   get coordinatesPanel() {
-    return <CardText>
+    return (<CardText>
       <div className="options__content">
         <div className="options__input-wrapper">
           <TextField
@@ -88,11 +90,11 @@ export class Map extends PureComponent {
           />
         </div>
       </div>
-    </CardText>;
+    </CardText>);
   }
 
   get locationPanel() {
-    return <CardActions>
+    return (<CardActions>
       <div className="options__button-wrapper">
         <RaisedButton
           secondary
@@ -100,7 +102,7 @@ export class Map extends PureComponent {
           onClick={this.getCurrentLocation}
         />
       </div>
-    </CardActions>;
+    </CardActions>);
   };
 
   get options() {
@@ -117,7 +119,7 @@ export class Map extends PureComponent {
     return {
       scrollwheel: false,
       styles: mapStyles,
-    }
+    };
   }
 
   render() {
@@ -131,17 +133,17 @@ export class Map extends PureComponent {
               <CardActions>
                 <FlatButton
                   label="Current location"
-                  onClick={() => this.changeMode(LOCATION_MODE)}
+                  onClick={() => this.props.changeMode(LOCATION_MODE)}
                   disabled={or(isLocationMode(mode), equals(this.props.hasLocationPermissions, false))}
                 />
                 <FlatButton
                   label="Coordinates"
-                  onClick={() => this.changeMode(COORDINATES_MODE)}
+                  onClick={() => this.props.changeMode(COORDINATES_MODE)}
                   disabled={isCoordinatesMode(mode)}
                 />
                 <FlatButton
                   label="Move the marker"
-                  onClick={() => this.changeMode(PIN_MODE)}
+                  onClick={() => this.props.changeMode(PIN_MODE)}
                   disabled={isPinMode(mode)}
                 />
                 <div className="options__button-wrapper">
