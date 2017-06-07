@@ -5,7 +5,6 @@ import { get } from 'lodash';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { green500, green700, amber800 } from 'material-ui/styles/colors';
-import AppBar from 'material-ui/AppBar';
 
 import { appLocales, translationMessages } from '../i18n';
 import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
@@ -59,11 +58,6 @@ export class App extends PureComponent {
         >
           <MuiThemeProvider muiTheme={this.muiTheme}>
             <div className="app__content">
-              <AppBar
-                title="React-Redux Exercise"
-                showMenuIconButton={false}
-              />
-
               {React.Children.only(this.props.children)}
             </div>
           </MuiThemeProvider>

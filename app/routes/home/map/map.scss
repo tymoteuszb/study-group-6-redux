@@ -1,0 +1,21 @@
+.map__container {
+  width: 100%;
+  height: 100vh;
+}
+
+.map__content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.map__options {
+  display: flex;
+  align-self: flex-end;
+  margin-bottom: 100px;
+}
