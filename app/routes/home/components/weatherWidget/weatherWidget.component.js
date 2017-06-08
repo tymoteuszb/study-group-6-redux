@@ -2,6 +2,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import {Card, CardHeader } from 'material-ui/Card';
 import {GridList, GridTile} from 'material-ui/GridList';
+import CircularProgress from 'material-ui/CircularProgress';
 
 
 export class WeatherWidget extends PureComponent {
@@ -15,6 +16,7 @@ export class WeatherWidget extends PureComponent {
   }
 
   render() {
+    const gotWeather = !!this.props.weather
     return (
       <div className="weather-widget">
         <Card>
@@ -22,6 +24,7 @@ export class WeatherWidget extends PureComponent {
             title="Current weather"
           />
           Weather Widget
+          {!gotWeather ? <CircularProgress size={80} thickness={5} /> : null}
           {this.props.weather.map((weather) => (
             <GridTile
               key={weather.get('id')}
