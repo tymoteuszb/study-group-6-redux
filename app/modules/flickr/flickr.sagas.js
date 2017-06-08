@@ -1,15 +1,18 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 import envConfig from 'env-config';
 
-import { FlickrActions, FlickrTypes } from './flickr.redux';
+import { FlickrActions } from './flickr.redux';
+import { MapTypes } from '../map/map.redux';
+import { selectPosition } from '../map/map.selectors';
 import { get } from '../api/api.sagas';
 
 
-export function* getPhotosSaga({ latitude, longitude }) {
+export function* getPhotosSaga() {
   try {
+    const position = yield select(selectPosition);
     const data = yield call(get, 'api/flickr/', {
-      'lat': latitude,
-      'lon': longitude,
+      'lat': position.get('lat'),
+      'lon': position.get('long'),
       'method': 'flickr.photos.search',
       'format': 'json',
       'nojsoncallback': 1,
@@ -25,6 +28,6 @@ export function* getPhotosSaga({ latitude, longitude }) {
 
 export default function* countrySaga() {
   yield [
-    yield takeLatest(FlickrTypes.GET_PHOTOS, getPhotosSaga),
+    yield takeLatest(MapTypes.CHANGE_POSITION, getPhotosSaga),
   ];
 }

@@ -44,7 +44,7 @@ export class Home extends PureComponent {
           <div className="home__column home__column--half">
             <Incidents />
           </div>
-          <div className="home__column">
+          <div className="home__column home__column--half">
             <Entertainment />
           </div>
         </div>

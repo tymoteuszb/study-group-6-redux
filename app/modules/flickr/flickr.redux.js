@@ -1,5 +1,5 @@
 import { createActions, createReducer } from 'reduxsauce';
-import { Record, List } from 'immutable';
+import { Record } from 'immutable';
 
 
 export const { Types: FlickrTypes, Creators: FlickrActions } = createActions({
@@ -9,7 +9,7 @@ export const { Types: FlickrTypes, Creators: FlickrActions } = createActions({
 }, { prefix: 'FLICKR_' });
 
 const FlickrRecord = new Record({
-  photos: List(),
+  photos: null,
 });
 
 export const INITIAL_STATE = new FlickrRecord({});

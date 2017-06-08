@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { List, ListItem } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
+import { Card, CardHeader } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 
 import envConfig from 'env-config';
@@ -19,23 +19,27 @@ export class Entertainment extends PureComponent {
   render() {
     return (
       <div className="entertainment">
-        <List>
-          <Subheader>Places for you</Subheader>
-            {(this.props.cinema.size ? this.props.cinema : this.props.park).toArray().map((place) => (
-              <ListItem
-                key={place.get('id')}
-                leftAvatar={<Avatar src={place.get('icon')} />}
-                primaryText={place.get('name')}
-                secondaryText={
-                  <p>
-                    {place.get('vicinity')}
-                  </p>
-                }
-                secondaryTextLines={1}
-                onClick={this.openPhoto(place.getIn(['photos', 0, 'photo_reference']))}
-              />
-            ))}
-        </List>
+        <Card>
+          <CardHeader
+            title="Places for you"
+          />
+          <List>
+              {(this.props.cinema.size ? this.props.cinema : this.props.park).toArray().map((place) => (
+                <ListItem
+                  key={place.get('id')}
+                  leftAvatar={<Avatar src={place.get('icon')} />}
+                  primaryText={place.get('name')}
+                  secondaryText={
+                    <p>
+                      {place.get('vicinity')}
+                    </p>
+                  }
+                  secondaryTextLines={1}
+                  onClick={this.openPhoto(place.getIn(['photos', 0, 'photo_reference']))}
+                />
+              ))}
+          </List>
+        </Card>
       </div>
     );
   }

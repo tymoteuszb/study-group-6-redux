@@ -1,5 +1,5 @@
 import { createActions, createReducer } from 'reduxsauce';
-import { Record, List } from 'immutable';
+import { Record } from 'immutable';
 
 
 export const { Types: IncidentTypes, Creators: IncidentActions } = createActions({
@@ -9,7 +9,7 @@ export const { Types: IncidentTypes, Creators: IncidentActions } = createActions
 }, { prefix: 'INCIDENT_' });
 
 const IncidentRecord = new Record({
-  list: List(),
+  list: null,
 });
 
 export const INITIAL_STATE = new IncidentRecord({});

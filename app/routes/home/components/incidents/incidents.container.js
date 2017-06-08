@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import { Incidents } from './incidents.component';
-import { IncidentActions } from '../../../../modules/incident/incident.redux';
 import { selectIncidentList } from '../../../../modules/incident/incident.selectors';
 
 
@@ -14,7 +13,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getIncidents: IncidentActions.getList,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Incidents);
