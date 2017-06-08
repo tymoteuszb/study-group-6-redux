@@ -1,15 +1,20 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 import envConfig from 'env-config';
 
-import { IncidentActions, IncidentTypes } from './incident.redux';
+import { IncidentActions } from './incident.redux';
+import { MapTypes } from '../map/map.redux';
+import { selectPosition } from '../map/map.selectors';
 import { get } from '../api/api.sagas';
 
 
-export function* getListSaga({ latitude, longitude }) {
+export function* getListSaga() {
   try {
-    const data = yield call(get, `/api/mapquest/incidents`, {
+    const position = yield select(selectPosition);
+    const lat = position.get('lat');
+    const long = position.get('long');
+    const data = yield call(get, '/api/mapquest/incidents', {
       outFormat: 'json',
-      boundingBox: `${latitude - 0.3},${longitude - 0.3},${latitude + 0.3},${longitude + 0.3}`,
+      boundingBox: `${lat - 0.3},${long - 0.3},${lat + 0.3},${long + 0.3}`,
       key: envConfig.mapquest.apiKey,
     });
 
@@ -22,6 +27,6 @@ export function* getListSaga({ latitude, longitude }) {
 
 export default function* countrySaga() {
   yield [
-    yield takeLatest(IncidentTypes.GET_LIST, getListSaga),
+    yield takeLatest(MapTypes.CHANGE_POSITION, getListSaga),
   ];
 }

@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import { FlickrPhotos } from './flickrPhotos.component';
-import { FlickrActions } from '../../../../modules/flickr/flickr.redux';
 import { selectFlickrPhotos } from '../../../../modules/flickr/flickr.selectors';
 
 
@@ -14,7 +13,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getPhotos: FlickrActions.getPhotos,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlickrPhotos);
