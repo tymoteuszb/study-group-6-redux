@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 
 import FlickrPhotos from './components/flickrPhotos/flickrPhotos.container';
+import Incidents from './components/incidents/incidents.container';
 import WeatherWidget from './components/weatherWidget/weatherWidget.container';
 import Entertainment from './components/entertainment/entertainment.container';
 
@@ -39,6 +40,9 @@ export class Home extends PureComponent {
           </div>
           <div className="home__column home__column--half">
             <WeatherWidget />
+          </div>
+          <div className="home__column home__column--half">
+            <Incidents />
           </div>
           <div className="home__column">
             <Entertainment />

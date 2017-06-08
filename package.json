@@ -93,6 +93,7 @@
     "lodash": "4.17.2",
     "material-ui": "^0.18.1",
     "minimist": "1.2.0",
+    "moment": "^2.18.1",
     "normalize.css": "^5.0.0",
     "query-string": "^4.3.2",
     "ramda": "^0.24.1",

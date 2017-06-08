@@ -24,8 +24,20 @@ api.use((req, res, next) => {
   next();
 });
 
-api.get('/flickr', function (req, res) {
-  const url = 'https://api.flickr.com/services/rest/?' + querystring.stringify(req.query);
+api.get('/flickr/*', function (req, res) {
+  const reqUrl = req.originalUrl.replace('/flickr/', '');
+  const url = `https://api.flickr.com/services/rest/${reqUrl}`;
+  request.get({ url }, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      res.json(JSON.parse(body));
+    }
+    res.status(response.statusCode).end();
+  });
+});
+
+api.get('/mapquest/*', function (req, res) {
+  const reqUrl = req.originalUrl.replace('/mapquest/', '');
+  const url = `https://www.mapquestapi.com/traffic/v2/${reqUrl}`;
   request.get({ url }, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       res.json(JSON.parse(body));
