@@ -34,6 +34,16 @@ api.get('/flickr', function (req, res) {
   });
 });
 
+api.get('/openweathermap', function (req, res) {
+  const url = 'http://api.openweathermap.org/data/2.5/weather?' + querystring.stringify(req.query);
+  request.get({ url }, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      res.json(JSON.parse(body));
+    }
+    res.status(response.statusCode).end();
+  });
+});
+
 api.listen(port, host, (err) => {
   if (err) {
     return logger.error(err.message);
