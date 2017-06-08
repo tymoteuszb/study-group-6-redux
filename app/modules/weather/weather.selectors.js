@@ -32,6 +32,6 @@ export const selectWeather = () => createSelector(
 
 export const selectClouds = () => createSelector(
   selectWeatherDomain, state => {
-    return state.getIn(['weather', 'clouds', 'all']);
+    return state.get('isCloudy');
   }
 );

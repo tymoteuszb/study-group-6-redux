@@ -12,10 +12,10 @@ const weatherBackgroundMap = {
   0: weather0,
   20: weather20,
   40: weather40,
-  60: weather40,
-  80: weather40,
+  60: weather60,
+  80: weather80,
   100: weather100,
-}
+};
 
 export class WeatherWidget extends PureComponent {
   static propTypes = {
@@ -34,17 +34,17 @@ export class WeatherWidget extends PureComponent {
         case clouds >= 10 :
           return 20;
         case clouds >= 30 :
-            return 40;
+          return 40;
         case clouds >= 50 :
-            return 60;
+          return 60;
         case clouds >= 70 :
-            return 80;
+          return 80;
         case clouds >= 90 :
-            return 100;
+          return 100;
         default:
-            return 0;
+          return 0;
       }
-    }
+    };
 
     return (
       <div className="weather-widget">
