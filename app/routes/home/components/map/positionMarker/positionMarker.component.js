@@ -1,4 +1,4 @@
-import React, { PureComponent, PropTypes} from 'react';
+import React, { PureComponent } from 'react';
 import IconButton from 'material-ui/IconButton';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 

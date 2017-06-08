@@ -15,7 +15,7 @@ const MapRecord = new Record({
   mode: PIN_MODE,
   position: Map({
     lat: 52.414263,
-    long: 16.920183,
+    'long': 16.920183,
   }),
   hasLocationPermissions: false,
 });

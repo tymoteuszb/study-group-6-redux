@@ -66,7 +66,7 @@ export class Map extends PureComponent {
 
   get locationPanel() {
     return <LocationPanel onButtonClick={this.getCurrentLocation} />;
-  };
+  }
 
   get options() {
     return pipe(
@@ -76,7 +76,7 @@ export class Map extends PureComponent {
         [isCoordinatesMode, () => this.coordinatesPanel],
       ])
     )(this.props);
-  };
+  }
 
   get mapOptions() {
     return {
@@ -123,7 +123,7 @@ export class Map extends PureComponent {
           defaultZoom={this.props.zoom}
           center={{
             lat: this.props.position.get('lat'),
-            lng: this.props.position.get('long')
+            lng: this.props.position.get('long'),
           }}
           options={this.mapOptions}
         >

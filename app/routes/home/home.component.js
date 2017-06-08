@@ -15,7 +15,7 @@ export class Home extends PureComponent {
     hasLocationPermissions: PropTypes.bool.isRequired,
     position: PropTypes.object.isRequired,
     mode: PropTypes.string.isRequired,
-  }
+  };
 
   render() {
     return (

@@ -1,4 +1,4 @@
-import React, { PureComponent, PropTypes} from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 
@@ -7,7 +7,7 @@ export class CoordinatesPanel extends PureComponent {
     position: PropTypes.object.isRequired,
     handleLatitudeChange: PropTypes.func.isRequired,
     handleLongitudeChange: PropTypes.func.isRequired,
-  }
+  };
 
   render() {
     return (
