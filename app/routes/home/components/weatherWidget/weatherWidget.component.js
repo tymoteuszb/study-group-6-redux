@@ -27,20 +27,20 @@ export class WeatherWidget extends PureComponent {
     const weather = this.props.weather.get(0);
     const weatherBg = (cloudsStr) => {
       const clouds = parseInt(cloudsStr, 10);
-      if (clouds >= 10) {
-        return 20;
-      }
-      if (clouds >= 30) {
-        return 40;
-      }
-      if (clouds >= 50) {
-        return 60;
+      if (clouds >= 90) {
+        return 100;
       }
       if (clouds >= 70) {
         return 80;
       }
-      if (clouds >= 90) {
-        return 100;
+      if (clouds >= 50) {
+        return 60;
+      }
+      if (clouds >= 30) {
+        return 40;
+      }
+      if (clouds >= 10) {
+        return 20;
       }
       return 0;
     };
