@@ -10,26 +10,28 @@ export const selectWeather = () => createSelector(
     const temp = parseInt(kelvinToCelsius(parseInt(state.getIn(['weather', 'main', 'temp']), 10)), 10);
     const pressure = state.getIn(['weather', 'main', 'pressure']);
     const humidity = state.getIn(['weather', 'main', 'humidity']);
-    const code = state.getIn(['weather', 'cod']);
     const localization = state.getIn(['weather', 'name']);
     const clouds = state.getIn(['weather', 'clouds', 'all']);
     return state.getIn(['weather', 'weather'], List())
       .map((weather) => {
-        const iconUrl = `http://openweathermap.org/img/w/${weather.get('icon')}.png`;
-        const modernIcon = weatherIconMaker(code);
+        const modernIcon = weatherIconMaker(weather.get('id'));
         const description = `${weather.get('main')}`;
 
         return weather.merge({
           description: `${description}`,
-          icon: `${iconUrl}`,
           temp: `${temp} ℃`,
           pressure: `${pressure} hPa`,
           humidity: `${humidity}`,
-          code: `${code}`,
           modernIcon: `${modernIcon}`,
           localization: `${localization}`,
           clouds: `${clouds}`,
         });
       });
+  }
+);
+
+export const selectClouds = () => createSelector(
+  selectWeatherDomain, state => {
+    return state.getIn(['weather', 'clouds', 'all']);
   }
 );
