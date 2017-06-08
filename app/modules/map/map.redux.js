@@ -1,6 +1,9 @@
 import { Record, Map } from 'immutable';
 import { createReducer, createActions } from 'reduxsauce';
-import { PIN_MODE } from './map.constants';
+
+export const PIN_MODE = 'pin';
+export const COORDINATES_MODE = 'coordinates';
+export const LOCATION_MODE = 'location';
 
 export const { Types: MapTypes, Creators: MapActions } = createActions({
   changeMode: ['mode'],

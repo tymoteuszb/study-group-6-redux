@@ -5,8 +5,7 @@ import FlickrPhotos from './components/flickrPhotos/flickrPhotos.container';
 import WeatherWidget from './components/weatherWidget/weatherWidget.container';
 import Entertainment from './components/entertainment/entertainment.container';
 
-import { Map } from './map/map.component';
-import { PIN_MODE } from '../../modules/map/map.constants'
+import { Map } from './components/map/map.component';
 
 export class Home extends PureComponent {
   static propTypes = {
@@ -26,7 +25,7 @@ export class Home extends PureComponent {
         />
 
         <Map
-          currentMode={PIN_MODE}
+          currentMode={this.props.mode}
           changeLocationPermissions={this.props.changeLocationPermissions}
           changePosition={this.props.changePosition}
           position={this.props.position}

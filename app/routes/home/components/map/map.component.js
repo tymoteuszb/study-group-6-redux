@@ -2,28 +2,18 @@ import React, { PureComponent, PropTypes } from 'react';
 import GoogleMapReact from 'google-map-react';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Card, CardActions, CardText } from 'material-ui/Card';
-import TextField from 'material-ui/TextField';
-import IconButton from 'material-ui/IconButton';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
+import { Card, CardActions } from 'material-ui/Card';
 import { when, isNil, complement, equals, cond, pipe, or, prop } from 'ramda';
 
-import { PIN_MODE, COORDINATES_MODE, LOCATION_MODE } from '../../../modules/map/map.constants';
+import { PositionMarker } from './positionMarker/positionMarker.component';
+import { CoordinatesPanel } from './coordinatesPanel/coordinatesPanel.component';
+import { LocationPanel } from './locationPanel/locationPanel.component';
+import { PIN_MODE, COORDINATES_MODE, LOCATION_MODE } from '../../../../modules/map/map.redux';
 import { mapStyles } from './map.styles';
 
 const isLocationMode = equals(LOCATION_MODE);
 const isCoordinatesMode = equals(COORDINATES_MODE);
 const isPinMode = equals(PIN_MODE);
-const MARKER_COLOR = '#ff8f00';
-
-const PositionMarker = () => <div>
-  <IconButton
-    touch={true}
-    tooltipPosition="top-center"
-  >
-    <ActionGrade color={MARKER_COLOR} />
-  </IconButton>
-</div>;
 
 export class Map extends PureComponent {
   static propTypes = {
@@ -67,38 +57,15 @@ export class Map extends PureComponent {
   )(this.props);
 
   get coordinatesPanel() {
-    return (<CardText>
-      <div className="options__content">
-        <div className="options__input-wrapper">
-          <TextField
-            floatingLabelText="Latitude"
-            value={this.props.position.get('lat')}
-            onChange={this.handleLatitudeChange}
-            type="number"
-          />
-        </div>
-        <div className="options__input-wrapper">
-          <TextField
-            floatingLabelText="Longitude"
-            value={this.props.position.get('long')}
-            onChange={this.handleLongitudeChange}
-            type="number"
-          />
-        </div>
-      </div>
-    </CardText>);
+    return (<CoordinatesPanel
+      position={this.props.position}
+      handleLatitudeChange={this.handleLatitudeChange}
+      handleLongitudeChange={this.handleLongitudeChange}
+    />);
   }
 
   get locationPanel() {
-    return (<CardActions>
-      <div className="options__button-wrapper">
-        <RaisedButton
-          secondary
-          label="Get location"
-          onClick={this.getCurrentLocation}
-        />
-      </div>
-    </CardActions>);
+    return <LocationPanel onButtonClick={this.getCurrentLocation} />;
   };
 
   get options() {
