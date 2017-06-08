@@ -2,10 +2,10 @@ import React, { PropTypes, PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { IntlProvider } from 'react-intl';
 import { get } from 'lodash';
+import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { green500, green700, amber800 } from 'material-ui/styles/colors';
-import AppBar from 'material-ui/AppBar';
 
 import { appLocales, translationMessages } from '../i18n';
 import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
