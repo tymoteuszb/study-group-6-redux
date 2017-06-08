@@ -8,7 +8,7 @@ import { selectWeather } from '../../../../modules/weather/weather.selectors';
 
 
 const mapStateToProps = createStructuredSelector({
-  weather: selectWeather(),
+  weather: selectWeather,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({

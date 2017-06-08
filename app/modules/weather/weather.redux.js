@@ -10,14 +10,12 @@ export const { Types: WeatherTypes, Creators: WeatherActions } = createActions({
 
 const CampaignRecord = new Record({
   weather: List(),
-  isCloudy: null,
 });
 
 export const INITIAL_STATE = new CampaignRecord({});
 
 const getWeatherSuccessHandler = (state, action) => state.merge({
   weather: fromJS(action.data),
-  isCloudy: action.data.clouds.all > 50,
 });
 
 export const reducer = createReducer(INITIAL_STATE, {

@@ -3,6 +3,7 @@ import { Record, List } from 'immutable';
 
 
 export const { Types: GoogleTypes, Creators: GoogleActions } = createActions({
+  choosePlaces: [],
   getPlaces: ['latitude', 'longitude', 'placeType', 'name'],
   getPlacesSuccess: ['data', 'placeType'],
   getPlacesFailure: ['error'],

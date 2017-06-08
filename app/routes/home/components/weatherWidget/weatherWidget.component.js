@@ -53,7 +53,7 @@ export class WeatherWidget extends PureComponent {
           />
 
           { !weather || !weather.size ?
-            <CircularProgress size={80} thickness={5} />
+            <div className="flickr-photos__loader"><CircularProgress size={80} thickness={5} /></div>
             :
             <CardMedia key={weather.get('id')}>
               <div className="weather-box">

@@ -5,7 +5,7 @@ import { weatherIconMaker } from './weather.icon.helper';
 
 const selectWeatherDomain = state => state.get('weather');
 
-export const selectWeather = () => createSelector(
+export const selectWeather = createSelector(
   selectWeatherDomain, state => {
     const temp = parseInt(kelvinToCelsius(parseInt(state.getIn(['weather', 'main', 'temp']), 10)), 10);
     const pressure = state.getIn(['weather', 'main', 'pressure']);
@@ -30,8 +30,6 @@ export const selectWeather = () => createSelector(
   }
 );
 
-export const selectClouds = () => createSelector(
-  selectWeatherDomain, state => {
-    return state.get('isCloudy');
-  }
+export const selectClouds = createSelector(
+  selectWeatherDomain, state => state.getIn(['weather', 'clouds', 'all']) > 50
 );

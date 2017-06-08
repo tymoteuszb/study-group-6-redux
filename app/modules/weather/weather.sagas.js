@@ -4,6 +4,7 @@ import envConfig from 'env-config';
 import { WeatherActions } from './weather.redux';
 import { MapTypes } from '../map/map.redux';
 import { selectPosition } from '../map/map.selectors';
+import { GoogleActions } from '../google/google.redux';
 import { get } from '../api/api.sagas';
 
 
@@ -17,6 +18,7 @@ export function* getWeatherSaga() {
     });
 
     yield put(WeatherActions.getWeatherSuccess(data));
+    yield put(GoogleActions.choosePlaces());
   } catch (e) {
     yield put(WeatherActions.getWeatherFailure(e));
   }
