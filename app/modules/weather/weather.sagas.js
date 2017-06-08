@@ -1,15 +1,18 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 import envConfig from 'env-config';
 
-import { WeatherActions, WeatherTypes } from './weather.redux';
+import { WeatherActions } from './weather.redux';
+import { MapTypes } from '../map/map.redux';
+import { selectPosition } from '../map/map.selectors';
 import { get } from '../api/api.sagas';
 
 
-export function* getWeatherSaga({ latitude, longitude }) {
+export function* getWeatherSaga() {
   try {
+    const position = yield select(selectPosition);
     const data = yield call(get, 'api/openweathermap/', {
-      'lat': latitude,
-      'lon': longitude,
+      'lat': position.get('lat'),
+      'lon': position.get('long'),
       'appid': envConfig.openweathermap.apiKey,
     });
 
@@ -21,6 +24,6 @@ export function* getWeatherSaga({ latitude, longitude }) {
 
 export default function* weatherSaga() {
   yield [
-    yield takeLatest(WeatherTypes.GET_WEATHER, getWeatherSaga),
+    yield takeLatest(MapTypes.CHANGE_POSITION, getWeatherSaga),
   ];
 }
