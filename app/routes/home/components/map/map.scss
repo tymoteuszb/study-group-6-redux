@@ -1,0 +1,41 @@
+.map__container {
+  width: 100%;
+  height: calc(100vh - 200px);
+  position: relative;
+}
+
+.map__content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.map__options {
+  display: flex;
+  align-self: flex-end;
+  margin-bottom: 100px;
+}
+
+.options__input-wrapper {
+  margin: 10px;
+}
+
+.options__content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.options__button-wrapper{
+  padding: 20px;
+  text-align: center;
+}
+
+.options__buttons {
+  text-align: center;
+}

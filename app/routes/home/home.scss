@@ -1,9 +1,7 @@
 @import "components/components";
 
 .home {
-  display: flex;
-  justify-content: center;
-
+  display: block;
 }
 
 .home__content {
@@ -11,6 +9,7 @@
   padding: 40px;
   display: flex;
   flex: 1 1 auto;
+  flex-wrap: wrap;
 }
 
 .home__column {
