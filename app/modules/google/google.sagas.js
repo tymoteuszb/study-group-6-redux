@@ -2,6 +2,7 @@ import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import envConfig from 'env-config';
 
 import { GoogleActions, GoogleTypes } from './google.redux';
+import { WeatherTypes } from '../weather/weather.redux';
 import { get } from '../api/api.sagas';
 
 
@@ -21,8 +22,8 @@ export function* getPlacesSaga({ latitude, longitude, placeType, name }) {
   }
 }
 
-export function* choosePlacesSaga() {
-  if (Math.random() > 0.5) {
+export function* choosePlacesSaga({ data: { clouds } }) {
+  if (clouds.all > 30) {
     yield put(GoogleActions.getPlaces(52.4004454, 16.7612416, 'movie_theater', 'kino'));
   } else {
     yield put(GoogleActions.getPlaces(52.4004454, 16.7612416, 'park', 'park'));
@@ -30,6 +31,6 @@ export function* choosePlacesSaga() {
 }
 
 export default function* googleSaga() {
-  yield takeLatest('FLICKR_GET_PHOTOS', choosePlacesSaga); // get weather success action
+  yield takeLatest(WeatherTypes.GET_WEATHER_SUCCESS, choosePlacesSaga);
   yield takeEvery(GoogleTypes.GET_PLACES, getPlacesSaga);
 }
