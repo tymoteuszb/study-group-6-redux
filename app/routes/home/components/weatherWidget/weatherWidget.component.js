@@ -1,7 +1,5 @@
-
 import React, { PureComponent, PropTypes } from 'react';
-import {Card, CardHeader, CardMedia, CardTitle} from 'material-ui/Card';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { Card, CardHeader, CardMedia } from 'material-ui/Card';
 import CircularProgress from 'material-ui/CircularProgress';
 
 
@@ -16,7 +14,8 @@ export class WeatherWidget extends PureComponent {
   }
 
   render() {
-    const gotWeather = !!this.props.weather
+    const weather = this.props.weather.get(0);
+
     return (
       <div className="weather-widget">
         <Card>
@@ -24,8 +23,9 @@ export class WeatherWidget extends PureComponent {
             title="Current weather"
           />
 
-          {!gotWeather ? <CircularProgress size={80} thickness={5} /> : null}
-          {this.props.weather.map((weather) => (
+          { !weather || !weather.size ?
+            <CircularProgress size={80} thickness={5} />
+            :
             <CardMedia key={weather.get('id')}>
               <div className="weather-box">
                 <div className="weather-box__right">
@@ -37,7 +37,7 @@ export class WeatherWidget extends PureComponent {
               </div>
               <img className="" src="http://cdn.wallpapersafari.com/71/36/JPEBlv.jpg" alt="" />
             </CardMedia>
-          ))}
+          }
         </Card>
       </div>
     );
