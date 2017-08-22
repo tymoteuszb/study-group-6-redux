@@ -1,25 +1,12 @@
 @import "components/components";
 
 .home {
-  display: block;
-}
-
-.home__content {
-  max-width: 1260px;
-  padding: 40px;
   display: flex;
-  flex: 1 1 auto;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 0 auto;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 }
 
-.home__column {
-  display: flex;
-  margin-bottom: 40px;
-}
-
-.home__column--half {
-  max-width: 48%;
-  min-width: 48%;
+.home__weather {
+  width: 50%;
 }

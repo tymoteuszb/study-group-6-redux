@@ -23,6 +23,10 @@ export class WeatherWidget extends PureComponent {
     getWeather: PropTypes.func.isRequired,
   };
 
+  componentDidMount() {
+    this.props.getWeather();
+  }
+
   render() {
     const weather = this.props.weather.get(0);
     const weatherBg = (cloudsStr) => {

@@ -38,6 +38,7 @@ export class App extends PureComponent {
         accent1Color: amber800,
         pickerHeaderColor: green500,
       },
+      userAgent: false,
     });
   }
 
@@ -52,7 +53,6 @@ export class App extends PureComponent {
           titleTemplate="%s - React-Redux Exercise"
           defaultTitle="React-Redux Exercise"
         />
-
         <IntlProvider
           locale={this.props.language}
           messages={translationMessages[this.props.language]}
@@ -60,10 +60,9 @@ export class App extends PureComponent {
           <MuiThemeProvider muiTheme={this.muiTheme}>
             <div className="app__content">
               <AppBar
-                title="React-Redux Exercise"
+                title="without SSR"
                 showMenuIconButton={false}
               />
-
               {React.Children.only(this.props.children)}
             </div>
           </MuiThemeProvider>
